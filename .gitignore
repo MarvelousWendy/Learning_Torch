@@ -1,0 +1,8 @@
+.DS_Store
+3_Project_2025+/
+
+# ignore python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
