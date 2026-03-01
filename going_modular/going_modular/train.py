@@ -1,9 +1,10 @@
+"""
+Trains a PyTorch image classification model using device-agnostic code.
+"""
+
 import os
 import torch
-import data_setup
-import engine
-import model_builder
-import utils
+import data_setup, engine, model_builder, utils
 
 from torchvision import transforms
 
@@ -22,8 +23,8 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 
 # Create transforms
 data_transform = transforms.Compose([
-    transforms.Resize((64, 64)),
-    transforms.ToTensor()
+  transforms.Resize((64, 64)),
+  transforms.ToTensor()
 ])
 
 # Create DataLoaders with help from data_setup.py
@@ -47,17 +48,15 @@ optimizer = torch.optim.Adam(model.parameters(),
                              lr=LEARNING_RATE)
 
 # Start training with help from engine.py
-engine.train(
-    model=model,
-    train_dataloader=train_dataloader,
-    test_dataloader=test_dataloader,
-    loss_fn=loss_fn,
-    optimizer=optimizer,
-    epochs=NUM_EPOCHS,
-    device=device)
+engine.train(model=model,
+             train_dataloader=train_dataloader,
+             test_dataloader=test_dataloader,
+             loss_fn=loss_fn,
+             optimizer=optimizer,
+             epochs=NUM_EPOCHS,
+             device=device)
 
 # Save the model with help from utils.py
-utils.save_model(
-    model=model,
-    target_dir="models",
-    model_name="05_going_modular_script_mode_tinyvgg_model.pth")
+utils.save_model(model=model,
+                 target_dir="models",
+                 model_name="05_going_modular_script_mode_tinyvgg_model.pth")
